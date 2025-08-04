@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Gambar Bergerak</title>
+  <style>
+    canvas {
+      background: #fff;
+      display: block;
+      margin: 50px auto;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="kanvas" width="600" height="400"></canvas>
+
+  <script>
+    const canvas = document.getElementById('kanvas');
+    const ctx = canvas.getContext('2d');
+
+    const img = new Image();
+    img.src = 'gambar.png'; // Nama file gambar yang akan diunggah nanti
+
+    let x = 50, y = 50;
+    let dx = 2, dy = 2;
+
+    img.onload = function() {
+      setInterval(() => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, x, y, 100, 100);
+
+        x += dx;
+        y += dy;
+
+        if (x + 100 > canvas.width || x < 0) dx = -dx;
+        if (y + 100 > canvas.height || y < 0) dy = -dy;
+      }, 16);
+    };
+  </script>
+</body>
+</html>
+
